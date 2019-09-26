@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Base Syntax Assignment</title>
+            
+            <!-- DEVELOPMENT ENVIRONMENT USING CDN -->
+            <!-- REACT LIBRARY -->
+            <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+            <!-- REACT DOM LIBRARY -->
+            <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+            <!-- BABEL LIBRARY -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+            <!-- CSS LINK -->
+            <link rel="stylesheet" href="BaseSyntaxAssignment.css">
+        </head>
+        <body>
+            <!-- DESIGNATED LOCATION TO INSERT REACT CONTENT -->
+            <div id="app">REACT HAS NOT RENDERED YET!</div>
+
+            <!-- JAVASCRIPT -->
+            <script type="text/babel">
+            
+            // BASE SYNTAX ASSIGNMENT:::
+                //   1. Create TWO new components: UserInput and UserOutput
+                //   2. UserInput should hold an input element, UserOutput two paragraphs
+                //   3. Output multiple UserOutput components in the App component (any paragraph texts of your choice)
+                //   4. Pass a username (of your choice) to UserOutput via props and display it there
+                //   5. Add state to the App component (=> the username) and pass the username to the UserOutput component
+                //   6. Add a method to manipulate the state (=> an event-handler method)
+                //   7. Pass the event-handler method reference to the UserInput component and bind it to the input-change event
+                //   8. Ensure that the new input entered by the user overwrites the old username passed to UserOutput
+                //   9. Add two-way-binding to your input (in UserInput) to also display the starting username
+                //   10. Add styling of your choice to your components/ elements in the components - both with inline styles and stylesheets
+                
+            
+        // CHILD COMPONENT userInput:
+            const UserInput = (props) => {
+                    const inputStyle = { // Add styling to input field 
+                            width: "450px",
+                            height: "250px",
+                            border: '2px solid blue',
+                            backgroundColor: "black",
+                            color: "white",
+                            textAlign: "center",
+                            fontSize: "20px",
+                            margin: "0 auto"
+                            };
+                    return <input 
+                            type="text" 
+                            style={inputStyle}
+                            onChange={props.changed} // Bind the "changed" property using props to the input change event i.e, onChange
+                            value={props.currentName} /> // Value of the current name in the input field (two way binding)
+                    };   
+                
+        // CHILD COMPONENT userOutput:
+            const UserOutput = (props) => { // pass props as a function argument
+                    return (
+                            <div className="outputStyle"> {/* External style sheet */}
+                                <h1>My name is {props.userName}</h1> {/* Use props to display the name */}
+                                <hr />
+                                <p>A Self-taught Full Stack Web Developer in making who loves to learn new 
+                                web technologies passionately day in and day out</p>
+                                <p>Follow me on twitter: 
+                                    <a href="https://twitter.com/ShashiWebDev" target="_blank"> @ShashiWebDev </a>
+                                </p>
+                            </div>
+                            
+                            );
+                        }
+
+        // PARENT COMPONENT App:
+            class App extends React.Component {
+                constructor(props) {
+                    super(props); 
+                    this.state = { // added the state to the App component via a constructor method
+                        username: ": Clear and type any name in the black box =>"
+                    }
+                }
+
+                // Add an event handler method to manipulate above state for username
+                usernameChangedHandler = (e) => {
+                    this.setState({
+                            username: e.target.value
+                    });
+                }
+
+                render() {
+                  return (
+                    <div>
+                        <UserOutput userName="Shashi : I am Hard Coded and I will not change!" /> {/* Hard Coded */}    
+                        <UserOutput userName={ this.state.username } /> {/* Dynamically outputted username using state */}
+                        <UserInput 
+                           changed={this.usernameChangedHandler} // Pass above event handler method here as a reference
+                           currentName={this.state.username} /> {/* To display the current name in the input */}
+                    </div>
+                    );
+                }
+            }
+
+        // RENDER REACT TO THE DOM - WILL ACCEPT TWO ARGUMENTS (REACT WHAT, REACT WHERE)
+            ReactDOM.render(
+                // REACT WHAT - JSX
+                <App />,
+                // REACT WHERE - DIV WITH ID OF "APP"
+                document.getElementById("app")
+            );
+            
+            </script>
+        </body>
+   </html>
+      
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+/* Add styling to output field  */
+
+.outputStyle { 
+    margin: 0 auto;
+    width: "300px";
+    background-color: sandybrown;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 10%;
+    margin-top: 30px;
+    border: 2px dotted brown;
+}
+
+.outputStyle p a {
+    text-decoration: none;
+    color: slategrey;
+}
+
